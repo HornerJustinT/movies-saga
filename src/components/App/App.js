@@ -5,11 +5,6 @@ import {connect} from 'react-redux';
 import MovieList from '../MovieList/MovieList'
 class App extends Component {
   componentDidMount() {
-      this.getMoviesList();
-      console.log(this.props)
-  }
-  getMoviesList = () => {
-      this.props.dispatch({type:"GET_MOVIES"})
   }
 
   render(){
