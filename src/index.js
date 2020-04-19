@@ -9,12 +9,24 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+import {takeEvery, put} from 'redux-saga/effects';
+import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
+    yield takeEvery('GET_MOVIES', getMovieSaga);
 
 }
-
+function* getMovieSaga(action){
+    console.log('in getMovieSaga', action.payload);
+    try{
+        const response = yield axios.get(`movies/`);
+        yield put({type: 'SET_Movies', payload: response.data})
+    }
+    catch(error){
+        console.log('Error with Search GET', error);
+    }
+}
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 

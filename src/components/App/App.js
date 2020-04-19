@@ -1,15 +1,32 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import {HashRouter as Router, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
+import MovieList from '../MovieList/MovieList'
 class App extends Component {
-  // Renders the entire app on the DOM
-  render() {
+  componentDidMount() {
+      this.getMoviesList();
+      console.log(this.props)
+  }
+  getMoviesList = () => {
+      this.props.dispatch({type:"GET_MOVIES"})
+  }
+
+  render(){
+
     return (
       <div className="App">
-        <p>Empty Page</p>
+        <h1>Hi</h1>
+        <Router>
+          <Route exact path='/' component={MovieList}/>
+        </Router>
       </div>
     );
   }
 }
 
-export default App;
+const putReduxStateOnProps = (reduxStore) => ({
+  reduxStore
+})
+
+export default connect(putReduxStateOnProps)(App);
