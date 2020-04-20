@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Details from "../Details/Details";
 class Movie extends Component {
   render() {
-    console.log(this.props.movie);
     return (
       <div>
         <h1>{this.props.movie.title}</h1>
-        <img src = {this.props.movie.poster}></img>
+
+        <Router>
+          <div>
+            <Link to={"/details/" + this.props.movie.id}>
+              <img src={this.props.movie.poster}></img>
+            </Link>
+          </div>
+          <Route path="/details/:id" component={Details} />
+          {/* Why doesn't it go onto a new page? */}
+        </Router>
       </div>
     );
   }

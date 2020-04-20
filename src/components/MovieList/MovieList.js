@@ -1,25 +1,32 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Movie from "../Movie/Movie";
+import { HashRouter as Router, Link, Route } from "react-router-dom";
+
 class MovieList extends Component {
-    componentDidMount() {
-        this.props.dispatch({ type: 'GET_MOVIES' });
-        console.log(this.props.movies)
-    }
+  componentDidMount() {
+    this.props.dispatch({ type: "GET_MOVIES" });
+    console.log(this.props);
+  }
+
   render() {
-    if (this.props.reduxStore.movies.length>1) {
+    if (this.props.reduxStore.movies.length > 1) {
       return (
         <div>
           <h1>MovieList</h1>
           {this.props.reduxStore.movies.map((movie, i) => {
-            return <Movie key={i} movie={movie} />;
+            return (
+              <div>
+                <Movie key={i} movie={movie} />
+              </div>
+            );
           })}
+
         </div>
       );
-    } else{
-        return (<h1>Error</h1>);
-
-    } 
+    } else {
+      return <h1>Error</h1>;
+    }
   }
 }
 
